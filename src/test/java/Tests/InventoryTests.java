@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class AddAndRemoveTests extends BaseTest {
+public class InventoryTests extends BaseTest {
     @BeforeMethod
     public void pageSetUp() {
         driver.get(loginPage.loginPageURL);
@@ -14,7 +14,6 @@ public class AddAndRemoveTests extends BaseTest {
         loginPage.passwordField.click();
         loginPage.passwordField.sendKeys("secret_sauce");
         loginPage.loginButton.click();
-
     }
 
     @Test(priority = 10)
@@ -37,8 +36,6 @@ public class AddAndRemoveTests extends BaseTest {
         Assert.assertEquals(driver.findElement(By.className("shopping_cart_badge")).getText(),"1");
         homePage.cartButton.click();
         Assert.assertEquals(homePage.onesie.getText(),"Sauce Labs Onesie");
-
-
     }
     @Test(priority = 13)
     public void userCanAddBikeLightToCart(){
@@ -61,43 +58,49 @@ public class AddAndRemoveTests extends BaseTest {
         homePage.cartButton.click();
         Assert.assertEquals(homePage.redTShirt.getText(),"Test.allTheThings() T-Shirt (Red)");
     }
-
-
-
-
-
-
-
-
-
     @Test(priority = 20)
     public void userCanRemoveItemsFromCartOnHomePage(){
         homePage.addBackpack.click();
         homePage.removeBackpack.click();
         Assert.assertFalse(homePage.elementDisplayed(homePage.cartNotification));
+        homePage.cartButton.click();
+        Assert.assertFalse(homePage.elementDisplayed(cartPage.cartItem));
+        driver.navigate().back();
 
         homePage.addJacket.click();
         homePage.removeJacket.click();
         Assert.assertFalse(homePage.elementDisplayed(homePage.cartNotification));
+        homePage.cartButton.click();
+        Assert.assertFalse(homePage.elementDisplayed(cartPage.cartItem));
+        driver.navigate().back();
 
         homePage.addOnesie.click();
         homePage.removeOnesie.click();
         Assert.assertFalse(homePage.elementDisplayed(homePage.cartNotification));
+        homePage.cartButton.click();
+        Assert.assertFalse(homePage.elementDisplayed(cartPage.cartItem));
+        driver.navigate().back();
 
         homePage.addBikeLight.click();
         homePage.removeBikeLight.click();
         Assert.assertFalse(homePage.elementDisplayed(homePage.cartNotification));
+        homePage.cartButton.click();
+        Assert.assertFalse(homePage.elementDisplayed(cartPage.cartItem));
+        driver.navigate().back();
 
         homePage.addTShirt.click();
         homePage.removeTShirt.click();
         Assert.assertFalse(homePage.elementDisplayed(homePage.cartNotification));
+        homePage.cartButton.click();
+        Assert.assertFalse(homePage.elementDisplayed(cartPage.cartItem));
+        driver.navigate().back();
 
         homePage.addRedTShirt.click();
         homePage.removeRedTShirt.click();
         Assert.assertFalse(homePage.elementDisplayed(homePage.cartNotification));
-
+        homePage.cartButton.click();
+        Assert.assertFalse(homePage.elementDisplayed(cartPage.cartItem));
     }
-
     @Test(priority = 30 )
     public void userCanClickOnItems(){
         homePage.backpack.click();
@@ -111,8 +114,6 @@ public class AddAndRemoveTests extends BaseTest {
         homePage.onesie.click();
         driver.navigate().back();
         homePage.jacket.click();
-
-
     }
     @Test(priority = 40)
     public void userCanSortItems() throws InterruptedException {
@@ -124,7 +125,6 @@ public class AddAndRemoveTests extends BaseTest {
         homePage.lowToHigh.click();
         homePage.filterButton.click();
         homePage.highToLow.click();
-
     }
 
     @AfterMethod
